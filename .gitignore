@@ -3,3 +3,6 @@
 
 # Gradle generated files
 .gradle/
+
+# Generated files when running the application
+out/
