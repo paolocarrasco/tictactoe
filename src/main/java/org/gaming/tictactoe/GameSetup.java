@@ -9,13 +9,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
+
 class GameSetup {
 
   private static final String SIZE_PROPERTY_NAME = "size";
   private static final String DEFAULT_FILE_LOCATION = "game.properties";
-  private static final int DEFAULT_SIZE = 3;
-  private static final int MINIMUM_VALUE = 3;
-  private static final int MAXIMUM_VALUE = 10;
 
   GameConfiguration read() {
     URL configurationFile = getClass().getClassLoader().getResource(DEFAULT_FILE_LOCATION);
@@ -36,7 +35,7 @@ class GameSetup {
       configuration.load(Files.newBufferedReader(configurationPath));
       size = obtainSize(configuration);
     } catch (IOException e) {
-      String errorMessage = "There was an error while loading the configuration. Using default size (%d)";
+      String errorMessage = "There was an error while loading the configuration. Using default size";
       System.err.println(String.format(errorMessage, DEFAULT_SIZE));
     }
 
@@ -50,12 +49,6 @@ class GameSetup {
       return DEFAULT_SIZE;
     }
 
-    int size = Integer.parseInt(sizePropertyValue);
-
-    if (size < MINIMUM_VALUE || size > MAXIMUM_VALUE) {
-      return DEFAULT_SIZE;
-    }
-
-    return size;
+    return Integer.parseInt(sizePropertyValue);
   }
 }

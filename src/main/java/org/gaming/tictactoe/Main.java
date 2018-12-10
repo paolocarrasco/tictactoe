@@ -11,7 +11,10 @@ import org.gaming.tictactoe.domain.GameConfiguration;
 public class Main {
   public static void main(String... args) {
     GameSetup gameSetup = new GameSetup();
-    GameConfiguration read = args.length == 0 ? gameSetup.read() : gameSetup.read(args[0]);
-    System.out.printf("Welcome to the game with size %d", read.getSize());
+    GameConfiguration configuration = args.length == 0
+        ? gameSetup.read()
+        : gameSetup.read(args[0]);
+
+    System.out.printf("Welcome to the game with size %d", configuration.getSize());
   }
 }

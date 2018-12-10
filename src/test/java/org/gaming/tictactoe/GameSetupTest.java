@@ -6,13 +6,13 @@ import org.junit.Test;
 
 import java.net.URL;
 
+import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GameSetupTest {
 
   private static final int CONFIGURED_VALUE_IN_FILE = 4;
-  private static final int DEFAULT_SIZE_VALUE = 3;
 
   private GameSetup gameSetup;
 
@@ -38,23 +38,7 @@ public class GameSetupTest {
   @Test
   public void shouldReturnADefaultSizeOfTheGameWhenItDoesNotFindTheConfiguredFile() {
     GameConfiguration configuration = gameSetup.read("unknown-game.properties");
-    assertThat(configuration.getSize(), is(DEFAULT_SIZE_VALUE));
-  }
-
-  @Test
-  public void shouldUseDefaultValueIfSizeWasSetWithValueLessThanMinimum() {
-    URL configurationFile = getClass().getClassLoader().getResource("lower-game.properties");
-    String fileLocation = configurationFile.getFile();
-    GameConfiguration configuration = gameSetup.read(fileLocation);
-    assertThat(configuration.getSize(), is(DEFAULT_SIZE_VALUE));
-  }
-
-  @Test
-  public void shouldUseDefaultValueIfSizeWasSetWithValueGreaterThanMaximum() {
-    URL configurationFile = getClass().getClassLoader().getResource("higher-game.properties");
-    String fileLocation = configurationFile.getFile();
-    GameConfiguration configuration = gameSetup.read(fileLocation);
-    assertThat(configuration.getSize(), is(DEFAULT_SIZE_VALUE));
+    assertThat(configuration.getSize(), is(DEFAULT_SIZE));
   }
 
   @Test
@@ -62,6 +46,6 @@ public class GameSetupTest {
     URL configurationFile = getClass().getClassLoader().getResource("invalid-game.properties");
     String fileLocation = configurationFile.getFile();
     GameConfiguration configuration = gameSetup.read(fileLocation);
-    assertThat(configuration.getSize(), is(DEFAULT_SIZE_VALUE));
+    assertThat(configuration.getSize(), is(DEFAULT_SIZE));
   }
 }
