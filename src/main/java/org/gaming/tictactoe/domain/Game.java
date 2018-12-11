@@ -162,5 +162,9 @@ public class Game {
   public Player getWinner() {
     return winner;
   }
+
+  public int getSize() {
+    return gridSize;
+  }
 }
 

@@ -33,6 +33,7 @@ public class GameTest {
         {null, null, null, null}
     };
     assertThat(grid, is(equalTo(expectedGrid)));
+    assertThat(game.getSize(), is(4));
   }
 
   @Test
