@@ -90,4 +90,22 @@ public class GameTest {
     assertThat(game.isOver(), is(true));
   }
 
+  @Test
+  public void shouldReturnTrueIsOverIfGameHasWinnerInForwardDiagonal() {
+    game.move(new Coordinates(0, 0), Player.Human2);
+    game.move(new Coordinates(1, 1), Player.Human2);
+    game.move(new Coordinates(2, 2), Player.Human2);
+
+    assertThat(game.isOver(), is(true));
+  }
+
+  @Test
+  public void shouldReturnTrueIsOverIfGameHasWinnerInBackDiagonal() {
+    game.move(new Coordinates(0, 2), Player.Robot);
+    game.move(new Coordinates(1, 1), Player.Robot);
+    game.move(new Coordinates(2, 0), Player.Robot);
+
+    assertThat(game.isOver(), is(true));
+  }
+
 }

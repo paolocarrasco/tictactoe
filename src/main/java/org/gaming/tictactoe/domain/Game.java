@@ -16,7 +16,7 @@ public class Game {
   }
 
   public boolean isOver() {
-    return evaluateWinnerInColumns() || evaluateWinnerInRows();
+    return evaluateWinnerInColumns() || evaluateWinnerInRows() || evaluateWinnerInDiagonals();
   }
 
   private boolean evaluateWinnerInRows() {
@@ -80,6 +80,56 @@ public class Game {
         return true;
       }
     }
+    return false;
+  }
+
+  private boolean evaluateWinnerInDiagonals() {
+    String symbolD = null;
+
+    int counterSymbolD = 0;
+
+    // forward diagonal
+    for (int i = 0; i < gridSize; i++) {
+      String currentSlot = grid[i][i];
+
+      if (currentSlot == null) {
+        break;
+      }
+
+      if (symbolD == null) {
+        symbolD = currentSlot;
+      }
+
+      if (symbolD.equals(currentSlot)) {
+        counterSymbolD++;
+      }
+
+      if (counterSymbolD == gridSize) {
+        return true;
+      }
+    }
+
+    // back diagonal
+    for (int i = 0; i < gridSize; i++) {
+      String currentSlot = grid[i][gridSize - i - 1];
+
+      if (currentSlot == null) {
+        break;
+      }
+
+      if (symbolD == null) {
+        symbolD = currentSlot;
+      }
+
+      if (symbolD.equals(currentSlot)) {
+        counterSymbolD++;
+      }
+
+      if (counterSymbolD == gridSize) {
+        return true;
+      }
+    }
+
     return false;
   }
 
