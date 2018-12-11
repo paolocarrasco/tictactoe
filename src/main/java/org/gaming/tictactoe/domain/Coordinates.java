@@ -1,5 +1,8 @@
 package org.gaming.tictactoe.domain;
 
+/**
+ * It represents the position in the grid of a movement.
+ */
 public class Coordinates {
 
   private final int x;
@@ -10,11 +13,11 @@ public class Coordinates {
     this.y = y;
   }
 
-  public int getX() {
+  int getX() {
     return x;
   }
 
-  public int getY() {
+  int getY() {
     return y;
   }
 }

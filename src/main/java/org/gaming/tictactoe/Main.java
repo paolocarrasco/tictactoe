@@ -2,6 +2,7 @@ package org.gaming.tictactoe;
 
 import org.gaming.tictactoe.domain.Game;
 import org.gaming.tictactoe.domain.GameConfiguration;
+import org.gaming.tictactoe.io.GameSetup;
 
 /**
  * Entry file to start the game.
@@ -10,6 +11,7 @@ import org.gaming.tictactoe.domain.GameConfiguration;
  * configuration file (resources/game.properties).
  */
 public class Main {
+
   public static void main(String... args) {
     GameSetup gameSetup = new GameSetup();
     GameConfiguration configuration = args.length == 0

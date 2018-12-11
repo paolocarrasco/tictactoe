@@ -1,6 +1,8 @@
-package org.gaming.tictactoe;
+package org.gaming.tictactoe.io;
 
 import org.gaming.tictactoe.domain.GameConfiguration;
+import org.gaming.tictactoe.io.GameSetup;
+
 import org.junit.Before;
 import org.junit.Test;
 

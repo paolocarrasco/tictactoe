@@ -1,4 +1,4 @@
-package org.gaming.tictactoe;
+package org.gaming.tictactoe.io;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,12 +11,16 @@ import org.gaming.tictactoe.domain.GameConfiguration;
 
 import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
 
-class GameSetup {
+/**
+ * It allows to setup the game by reading a configuration file.
+ * By default in the resources folder in this application.
+ */
+public class GameSetup {
 
   private static final String SIZE_PROPERTY_NAME = "size";
   private static final String DEFAULT_FILE_LOCATION = "game.properties";
 
-  GameConfiguration read() {
+  public GameConfiguration read() {
     URL configurationFile = getClass().getClassLoader().getResource(DEFAULT_FILE_LOCATION);
 
     // We know this file exists in the resources file
@@ -26,7 +30,7 @@ class GameSetup {
     return read(fileLocation);
   }
 
-  GameConfiguration read(String configurationFileLocation) {
+  public GameConfiguration read(String configurationFileLocation) {
     int size = DEFAULT_SIZE;
 
     try {

@@ -1,5 +1,8 @@
 package org.gaming.tictactoe.domain;
 
+/**
+ * It contains all the configuration details for the game.
+ */
 public class GameConfiguration {
   public static final int DEFAULT_SIZE = 3;
 

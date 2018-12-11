@@ -9,16 +9,16 @@ import org.gaming.tictactoe.io.GameController;
 /**
  * It controls the flow of the game.
  */
-public class GameFlow {
+class GameFlow {
   private final Game game;
   private final GameController gameController;
 
-  public GameFlow(Game game, PrintStream out, InputStream in) {
+  GameFlow(Game game, PrintStream out, InputStream in) {
     this.game = game;
     gameController = new GameController(game, out, in);
   }
 
-  public void start() {
+  void start() {
     while (!game.isOver()) {
       gameController.printSnapshot();
       gameController.enterNextMove();
