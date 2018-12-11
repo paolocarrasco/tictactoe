@@ -9,16 +9,18 @@ public class Game {
   private final int gridSize;
   private int turn = 0;
   private int movements = 0;
+  private Player winner;
 
   public Game(GameConfiguration configuration) {
     players = Player.values();
     gridSize = configuration.getSize();
     grid = new String[configuration.getSize()][gridSize];
+    winner = Player.Unknown;
   }
 
   public boolean isOver() {
-    return evaluateWinnerInColumns()
-        || evaluateWinnerInRows()
+    return evaluateWinnerInRow()
+        || evaluateWinnerInColumn()
         || evaluateWinnerInDiagonals()
         || evaluateDraw();
   }
@@ -27,16 +29,13 @@ public class Game {
     return movements == gridSize * gridSize;
   }
 
-  private boolean evaluateWinnerInRows() {
-    for (int i = 0;
-         i < gridSize;
-         i++) {
+  private boolean evaluateWinnerInColumn() {
+    for (int i = 0; i < gridSize; i++) {
       String symbolY = null;
 
       int counterSymbolY = 0;
-      for (int j = 0;
-           j < gridSize;
-           j++) {
+
+      for (int j = 0; j < gridSize; j++) {
         String currentSlot = grid[j][i];
 
         if (currentSlot == null) {
@@ -53,23 +52,20 @@ public class Game {
       }
 
       if (counterSymbolY == gridSize) {
+        winner = Player.obtainPlayerBySymbol(symbolY);
         return true;
       }
     }
     return false;
   }
 
-  private boolean evaluateWinnerInColumns() {
-    for (int i = 0;
-         i < gridSize;
-         i++) {
+  private boolean evaluateWinnerInRow() {
+    for (int i = 0; i < gridSize; i++) {
       String symbolX = null;
 
       int counterSymbolX = 0;
 
-      for (int j = 0;
-           j < gridSize;
-           j++) {
+      for (int j = 0; j < gridSize; j++) {
         String currentSlot = grid[i][j];
 
         if (currentSlot == null) {
@@ -85,6 +81,7 @@ public class Game {
         }
       }
       if (counterSymbolX == gridSize) {
+        winner = Player.obtainPlayerBySymbol(symbolX);
         return true;
       }
     }
@@ -113,6 +110,7 @@ public class Game {
       }
 
       if (counterSymbolD == gridSize) {
+        winner = Player.obtainPlayerBySymbol(symbolD);
         return true;
       }
     }
@@ -134,6 +132,7 @@ public class Game {
       }
 
       if (counterSymbolD == gridSize) {
+        winner = Player.obtainPlayerBySymbol(symbolD);
         return true;
       }
     }
@@ -158,6 +157,10 @@ public class Game {
   public void move(Coordinates coordinates, Player player) {
     grid[coordinates.getX()][coordinates.getY()] = player.getSymbol();
     movements++;
+  }
+
+  public Player getWinner() {
+    return winner;
   }
 }
 

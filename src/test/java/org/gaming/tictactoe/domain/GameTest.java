@@ -125,4 +125,60 @@ public class GameTest {
 
     assertThat(game.isOver(), is(true));
   }
+
+  @Test
+  public void shouldReturnWinnerWhenColumnIsWon() {
+    game.move(new Coordinates(1, 2), Player.Human2);
+    game.move(new Coordinates(2, 2), Player.Human2);
+    game.move(new Coordinates(0, 2), Player.Human2);
+
+    game.isOver();
+    assertThat(game.getWinner(), is(Player.Human2));
+  }
+
+  @Test
+  public void shouldReturnWinnerWhenRowIsWon() {
+    game.move(new Coordinates(0, 2), Player.Human1);
+    game.move(new Coordinates(0, 0), Player.Human1);
+    game.move(new Coordinates(0, 1), Player.Human1);
+
+    game.isOver();
+    assertThat(game.getWinner(), is(Player.Human1));
+  }
+
+  @Test
+  public void shouldReturnWinnerWhenForwardDiagonalIsWon() {
+    game.move(new Coordinates(0, 2), Player.Robot);
+    game.move(new Coordinates(1, 1), Player.Robot);
+    game.move(new Coordinates(2, 0), Player.Robot);
+
+    game.isOver();
+    assertThat(game.getWinner(), is(Player.Robot));
+  }
+
+  @Test
+  public void shouldReturnWinnerWhenBackDiagonalIsWon() {
+    game.move(new Coordinates(0, 0), Player.Human2);
+    game.move(new Coordinates(1, 1), Player.Human2);
+    game.move(new Coordinates(2, 2), Player.Human2);
+
+    game.isOver();
+    assertThat(game.getWinner(), is(Player.Human2));
+  }
+
+  @Test
+  public void shouldReturnUnknownWhenThereIsDraw() {
+    game.move(new Coordinates(0, 0), Player.Human2);
+    game.move(new Coordinates(0, 1), Player.Human1);
+    game.move(new Coordinates(0, 2), Player.Robot);
+    game.move(new Coordinates(1, 0), Player.Human2);
+    game.move(new Coordinates(1, 1), Player.Robot);
+    game.move(new Coordinates(1, 2), Player.Human2);
+    game.move(new Coordinates(2, 0), Player.Human1);
+    game.move(new Coordinates(2, 1), Player.Robot);
+    game.move(new Coordinates(2, 2), Player.Human1);
+
+    game.isOver();
+    assertThat(game.getWinner(), is(Player.Unknown));
+  }
 }
