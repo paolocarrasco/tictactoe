@@ -1,13 +1,13 @@
 package org.gaming.tictactoe;
 
-import org.gaming.tictactoe.domain.GameConfiguration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+
+import org.gaming.tictactoe.domain.GameConfiguration;
 
 import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
 

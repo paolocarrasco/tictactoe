@@ -81,4 +81,13 @@ public class GameTest {
     assertThat(game.isOver(), is(true));
   }
 
+  @Test
+  public void shouldReturnTrueIsOverIfGameHasWinnerInAColumn() {
+    game.move(new Coordinates(1, 1), Player.Human2);
+    game.move(new Coordinates(2, 1), Player.Human2);
+    game.move(new Coordinates(0, 1), Player.Human2);
+
+    assertThat(game.isOver(), is(true));
+  }
+
 }

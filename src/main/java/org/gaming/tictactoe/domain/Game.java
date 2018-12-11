@@ -16,18 +16,62 @@ public class Game {
   }
 
   public boolean isOver() {
-    // evaluate column:
-    for (int i = 0; i < gridSize; i++) {
-      String symbolX = null;
-      int counterSymbolX = 0;
-      for (int j = 0; j < gridSize; j++) {
-        String currentSlot = grid[i][j];
+    return evaluateWinnerInColumns() || evaluateWinnerInRows();
+  }
+
+  private boolean evaluateWinnerInRows() {
+    for (int i = 0;
+         i < gridSize;
+         i++) {
+      String symbolY = null;
+
+      int counterSymbolY = 0;
+      for (int j = 0;
+           j < gridSize;
+           j++) {
+        String currentSlot = grid[j][i];
+
         if (currentSlot == null) {
           break;
         }
+
+        if (symbolY == null) {
+          symbolY = currentSlot;
+        }
+
+        if (symbolY.equals(currentSlot)) {
+          counterSymbolY++;
+        }
+      }
+
+      if (counterSymbolY == gridSize) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean evaluateWinnerInColumns() {
+    for (int i = 0;
+         i < gridSize;
+         i++) {
+      String symbolX = null;
+
+      int counterSymbolX = 0;
+
+      for (int j = 0;
+           j < gridSize;
+           j++) {
+        String currentSlot = grid[i][j];
+
+        if (currentSlot == null) {
+          break;
+        }
+
         if (symbolX == null) {
           symbolX = currentSlot;
         }
+
         if (symbolX.equals(currentSlot)) {
           counterSymbolX++;
         }
