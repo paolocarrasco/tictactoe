@@ -108,4 +108,21 @@ public class GameTest {
     assertThat(game.isOver(), is(true));
   }
 
+  @Test
+  public void shouldReturnTrueIsOverIfGameIsDraw() {
+    // x o c
+    // x c x
+    // o c o
+    game.move(new Coordinates(0, 0), Player.Human2);
+    game.move(new Coordinates(0, 1), Player.Human1);
+    game.move(new Coordinates(0, 2), Player.Robot);
+    game.move(new Coordinates(1, 0), Player.Human2);
+    game.move(new Coordinates(1, 1), Player.Robot);
+    game.move(new Coordinates(1, 2), Player.Human2);
+    game.move(new Coordinates(2, 0), Player.Human1);
+    game.move(new Coordinates(2, 1), Player.Robot);
+    game.move(new Coordinates(2, 2), Player.Human1);
+
+    assertThat(game.isOver(), is(true));
+  }
 }

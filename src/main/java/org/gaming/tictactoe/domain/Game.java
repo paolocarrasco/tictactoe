@@ -8,6 +8,7 @@ public class Game {
   private final Player[] players;
   private final int gridSize;
   private int turn = 0;
+  private int movements = 0;
 
   public Game(GameConfiguration configuration) {
     players = Player.values();
@@ -16,7 +17,14 @@ public class Game {
   }
 
   public boolean isOver() {
-    return evaluateWinnerInColumns() || evaluateWinnerInRows() || evaluateWinnerInDiagonals();
+    return evaluateWinnerInColumns()
+        || evaluateWinnerInRows()
+        || evaluateWinnerInDiagonals()
+        || evaluateDraw();
+  }
+
+  private boolean evaluateDraw() {
+    return movements == gridSize * gridSize;
   }
 
   private boolean evaluateWinnerInRows() {
@@ -149,5 +157,7 @@ public class Game {
 
   public void move(Coordinates coordinates, Player player) {
     grid[coordinates.getX()][coordinates.getY()] = player.getSymbol();
+    movements++;
   }
 }
+
