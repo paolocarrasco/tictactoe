@@ -1,5 +1,6 @@
 package org.gaming.tictactoe;
 
+import org.gaming.tictactoe.domain.Game;
 import org.gaming.tictactoe.domain.GameConfiguration;
 
 /**
@@ -15,6 +16,7 @@ public class Main {
         ? gameSetup.read()
         : gameSetup.read(args[0]);
 
-    System.out.printf("Welcome to the game with size %d", configuration.getSize());
+    new GameFlow(new Game(configuration), System.out, System.in)
+        .start();
   }
 }
