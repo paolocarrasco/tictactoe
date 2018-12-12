@@ -16,8 +16,8 @@ public abstract class Game {
   Game(GameConfiguration configuration) {
     gridSize = configuration.getSize();
     grid = new String[gridSize][gridSize];
-    players = Player.values();
-    winner = Player.Unknown;
+    players = configuration.getPlayers();
+    winner = Player.NoOne;
   }
 
   public abstract boolean isOver();

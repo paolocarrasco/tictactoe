@@ -1,17 +1,23 @@
 package org.gaming.tictactoe.io;
 
-import org.gaming.tictactoe.domain.GameConfiguration;
-import org.gaming.tictactoe.io.GameSetup;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
+import org.gaming.tictactoe.domain.GameConfiguration;
+import org.gaming.tictactoe.domain.Player;
+
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
+
+@SuppressWarnings("ConstantConditions")
 public class GameSetupTest {
 
   private static final int CONFIGURED_VALUE_IN_FILE = 4;
@@ -49,5 +55,25 @@ public class GameSetupTest {
     String fileLocation = configurationFile.getFile();
     GameConfiguration configuration = gameSetup.read(fileLocation);
     assertThat(configuration.getSize(), is(DEFAULT_SIZE));
+  }
+
+  @Test
+  public void shouldUseDefaultValueIfPropertyForSizeIsNotSet() {
+    URL configurationFile = getClass().getClassLoader().getResource("empty-game.properties");
+    String fileLocation = configurationFile.getFile();
+    GameConfiguration configuration = gameSetup.read(fileLocation);
+    assertThat(configuration.getSize(), is(DEFAULT_SIZE));
+  }
+
+  @Test
+  public void shouldUseDefaultSymbolsForPlayersIfTheyAreNotSet() {
+    URL configurationFile = getClass().getClassLoader().getResource("empty-game.properties");
+    String fileLocation = configurationFile.getFile();
+    GameConfiguration configuration = gameSetup.read(fileLocation);
+    List<String> symbols = Arrays.stream(configuration.getPlayers())
+        .map(Player::getSymbol)
+        .collect(Collectors.toList());
+
+    assertThat(symbols, hasItems("C", "X", "O"));
   }
 }

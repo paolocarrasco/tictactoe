@@ -39,7 +39,8 @@ public class GameSetup {
       configuration.load(Files.newBufferedReader(configurationPath));
       size = obtainSize(configuration);
     } catch (IOException e) {
-      String errorMessage = "There was an error while loading the configuration. Using default size";
+      String errorMessage = "There was an error while loading the configuration. "
+          + "Using default size";
       System.err.println(String.format(errorMessage, DEFAULT_SIZE));
     }
 
@@ -47,7 +48,10 @@ public class GameSetup {
   }
 
   private int obtainSize(Properties configuration) {
-    String sizePropertyValue = configuration.getProperty(SIZE_PROPERTY_NAME);
+    String sizePropertyValue = configuration.getProperty(
+        SIZE_PROPERTY_NAME,
+        String.valueOf(DEFAULT_SIZE)
+    );
 
     if (!sizePropertyValue.matches("^\\d+$")) {
       return DEFAULT_SIZE;

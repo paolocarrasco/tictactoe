@@ -126,6 +126,6 @@ public class GameOverTest {
     game.move(new Coordinates(2, 2), Player.Human1);
 
     game.isOver();
-    assertThat(game.getWinner(), is(Player.Unknown));
+    assertThat(game.getWinner(), is(Player.NoOne));
   }
 }

@@ -75,7 +75,7 @@ public class GameControllerTest {
   }
 
   private class WinnerContainer {
-    private Player winner = Player.Unknown;
+    private Player winner = Player.NoOne;
 
     public Player getWinner() {
       return winner;

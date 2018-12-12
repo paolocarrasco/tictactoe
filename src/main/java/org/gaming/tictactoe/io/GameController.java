@@ -62,7 +62,7 @@ public class GameController {
     out.print("Game is over! ");
     Player winner = this.game.getWinner();
 
-    if (winner == Player.Unknown) {
+    if (winner == Player.NoOne) {
       out.println("It was a draw...");
     } else {
       out.printf("The winner was %s.%n", winner.name());

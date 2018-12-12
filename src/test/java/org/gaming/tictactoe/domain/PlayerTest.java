@@ -23,7 +23,7 @@ public class PlayerTest {
   }
 
   @Test
-  public void shouldReturnUnknownIfSymbolIsNull() {
-    assertThat(Player.obtainPlayerBySymbol(null), is(Player.Unknown));
+  public void shouldReturnNoOneIfSymbolIsNull() {
+    assertThat(Player.obtainPlayerBySymbol(null), is(Player.NoOne));
   }
 }

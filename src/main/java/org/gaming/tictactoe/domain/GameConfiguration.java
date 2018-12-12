@@ -20,4 +20,8 @@ public class GameConfiguration {
   public int getSize() {
     return this.size;
   }
+
+  public Player[] getPlayers() {
+    return Player.values();
+  }
 }

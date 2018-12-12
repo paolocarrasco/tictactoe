@@ -7,7 +7,7 @@ public enum Player {
   Robot("C"),
   Human1("X"),
   Human2("O"),
-  Unknown(null);
+  NoOne(null);
 
   private String symbol;
 
@@ -23,7 +23,7 @@ public enum Player {
     } else if ("C".equals(symbol)){
       return Robot;
     }
-    return Unknown;
+    return NoOne;
   }
 
   public String getSymbol() {
