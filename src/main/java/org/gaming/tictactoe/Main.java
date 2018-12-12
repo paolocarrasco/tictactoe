@@ -1,7 +1,7 @@
 package org.gaming.tictactoe;
 
-import org.gaming.tictactoe.domain.Game;
 import org.gaming.tictactoe.domain.GameConfiguration;
+import org.gaming.tictactoe.domain.SimpleGame;
 import org.gaming.tictactoe.io.GameSetup;
 
 /**
@@ -18,7 +18,7 @@ public class Main {
         ? gameSetup.read()
         : gameSetup.read(args[0]);
 
-    new GameFlow(new Game(configuration), System.out, System.in)
+    new GameFlow(new SimpleGame(configuration), System.out, System.in)
         .start();
   }
 }

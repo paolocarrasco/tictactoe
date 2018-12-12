@@ -7,10 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import org.gaming.tictactoe.domain.Coordinates;
-import org.gaming.tictactoe.domain.Game;
-import org.gaming.tictactoe.domain.GameConfiguration;
-import org.gaming.tictactoe.domain.Player;
+import org.gaming.tictactoe.domain.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,7 +22,7 @@ public class GameControllerTest {
   @Before
   public void setUp() {
     winnerContainer = new WinnerContainer();
-    game = new Game(new GameConfiguration(3)) {
+    game = new SimpleGame(new GameConfiguration(3)) {
       @Override
       public Player getWinner() {
         return winnerContainer.getWinner();
