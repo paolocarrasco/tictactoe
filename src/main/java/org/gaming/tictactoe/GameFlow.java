@@ -25,6 +25,7 @@ class GameFlow {
     }
 
     gameController.printWinner();
+    gameController.printSnapshot();
   }
 
 }

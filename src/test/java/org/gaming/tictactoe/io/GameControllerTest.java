@@ -35,7 +35,7 @@ public class GameControllerTest {
     PrintStream printStream = new PrintStream(outputStream);
     gameController = new GameController(game, printStream, System.in) {
       @Override
-      Coordinates requestNextMove() {
+      Coordinates requestNextMoveFor(Player player) {
         return new Coordinates(1, 2);
       }
     };
