@@ -3,9 +3,9 @@ package org.gaming.tictactoe.exceptions;
 /**
  * Thrown when a movement is not valid.
  */
-public class NotValidMovementException extends Exception {
+public class InvalidMovementException extends Exception {
 
-  public NotValidMovementException(String message) {
+  public InvalidMovementException(String message) {
     super(message);
   }
 }

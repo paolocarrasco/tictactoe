@@ -7,7 +7,7 @@ import java.util.Scanner;
 import org.gaming.tictactoe.domain.Coordinates;
 import org.gaming.tictactoe.domain.Game;
 import org.gaming.tictactoe.domain.Player;
-import org.gaming.tictactoe.exceptions.NotValidMovementException;
+import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 import static java.util.Optional.ofNullable;
 
@@ -34,7 +34,7 @@ public class GameController {
       try {
         this.game.move(coordinates, player);
         break;
-      } catch (NotValidMovementException e) {
+      } catch (InvalidMovementException e) {
         showInvalidMovement();
       }
     } while (true);

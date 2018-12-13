@@ -5,7 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import org.gaming.tictactoe.exceptions.NotValidMovementException;
+import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -64,7 +64,7 @@ public class GameTest {
 
   @Test
   public void shouldPutCoordinatesInGridWhenMovingToNotPlayedSlot() throws
-      NotValidMovementException {
+      InvalidMovementException {
     Coordinates coordinates = new Coordinates(2, 1);
     game.move(coordinates, Player.Human1);
     String[][] expectedGrid = {
@@ -77,16 +77,16 @@ public class GameTest {
   }
 
   @Test
-  public void shouldThrowExceptionWhenMovingToPlayedSlot() throws NotValidMovementException {
+  public void shouldThrowExceptionWhenMovingToPlayedSlot() throws InvalidMovementException {
     game.move(new Coordinates(2, 1), Player.Human1);
-    expectedException.expect(NotValidMovementException.class);
+    expectedException.expect(InvalidMovementException.class);
     expectedException.expectMessage("Slot was already played");
     game.move(new Coordinates(2, 1), Player.Robot);
   }
 
   @Test
-  public void shouldThrowExceptionWhenMovingToNonExistingSlot() throws NotValidMovementException {
-    expectedException.expect(NotValidMovementException.class);
+  public void shouldThrowExceptionWhenMovingToNonExistingSlot() throws InvalidMovementException {
+    expectedException.expect(InvalidMovementException.class);
     expectedException.expectMessage("Coordinates numbers of slot should be between 0 and 3");
     game.move(new Coordinates(2, 3), Player.Robot);
   }

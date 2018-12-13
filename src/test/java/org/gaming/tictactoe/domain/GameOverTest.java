@@ -3,7 +3,7 @@ package org.gaming.tictactoe.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.gaming.tictactoe.exceptions.NotValidMovementException;
+import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,7 +22,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameHasWinnerInARow() throws NotValidMovementException {
+  public void shouldReturnTrueIsOverIfGameHasWinnerInARow() throws InvalidMovementException {
     game.move(new Coordinates(1, 0), Player.Human1);
     game.move(new Coordinates(1, 1), Player.Human1);
     game.move(new Coordinates(1, 2), Player.Human1);
@@ -31,7 +31,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameHasWinnerInAColumn() throws NotValidMovementException {
+  public void shouldReturnTrueIsOverIfGameHasWinnerInAColumn() throws InvalidMovementException {
     game.move(new Coordinates(1, 1), Player.Human2);
     game.move(new Coordinates(2, 1), Player.Human2);
     game.move(new Coordinates(0, 1), Player.Human2);
@@ -41,7 +41,7 @@ public class GameOverTest {
 
   @Test
   public void shouldReturnTrueIsOverIfGameHasWinnerInForwardDiagonal() throws
-      NotValidMovementException {
+      InvalidMovementException {
     game.move(new Coordinates(0, 0), Player.Human2);
     game.move(new Coordinates(1, 1), Player.Human2);
     game.move(new Coordinates(2, 2), Player.Human2);
@@ -51,7 +51,7 @@ public class GameOverTest {
 
   @Test
   public void shouldReturnTrueIsOverIfGameHasWinnerInBackDiagonal() throws
-      NotValidMovementException {
+      InvalidMovementException {
     game.move(new Coordinates(0, 2), Player.Robot);
     game.move(new Coordinates(1, 1), Player.Robot);
     game.move(new Coordinates(2, 0), Player.Robot);
@@ -60,7 +60,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameIsDraw() throws NotValidMovementException {
+  public void shouldReturnTrueIsOverIfGameIsDraw() throws InvalidMovementException {
     // x o c
     // x c x
     // o c o
@@ -78,7 +78,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenColumnIsWon() throws NotValidMovementException {
+  public void shouldReturnWinnerWhenColumnIsWon() throws InvalidMovementException {
     game.move(new Coordinates(1, 2), Player.Human2);
     game.move(new Coordinates(2, 2), Player.Human2);
     game.move(new Coordinates(0, 2), Player.Human2);
@@ -88,7 +88,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenRowIsWon() throws NotValidMovementException {
+  public void shouldReturnWinnerWhenRowIsWon() throws InvalidMovementException {
     game.move(new Coordinates(0, 2), Player.Human1);
     game.move(new Coordinates(0, 0), Player.Human1);
     game.move(new Coordinates(0, 1), Player.Human1);
@@ -98,7 +98,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenForwardDiagonalIsWon() throws NotValidMovementException {
+  public void shouldReturnWinnerWhenForwardDiagonalIsWon() throws InvalidMovementException {
     game.move(new Coordinates(0, 2), Player.Robot);
     game.move(new Coordinates(1, 1), Player.Robot);
     game.move(new Coordinates(2, 0), Player.Robot);
@@ -108,7 +108,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenBackDiagonalIsWon() throws NotValidMovementException {
+  public void shouldReturnWinnerWhenBackDiagonalIsWon() throws InvalidMovementException {
     game.move(new Coordinates(0, 0), Player.Human2);
     game.move(new Coordinates(1, 1), Player.Human2);
     game.move(new Coordinates(2, 2), Player.Human2);
@@ -118,7 +118,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnUnknownWhenThereIsDraw() throws NotValidMovementException {
+  public void shouldReturnUnknownWhenThereIsDraw() throws InvalidMovementException {
     game.move(new Coordinates(0, 0), Player.Human2);
     game.move(new Coordinates(0, 1), Player.Human1);
     game.move(new Coordinates(0, 2), Player.Robot);

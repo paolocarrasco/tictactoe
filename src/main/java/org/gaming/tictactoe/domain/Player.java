@@ -1,5 +1,7 @@
 package org.gaming.tictactoe.domain;
 
+import java.util.Arrays;
+
 /**
  * All the players the game can have.
  */
@@ -12,9 +14,8 @@ public class Player {
   public static final Player Human2 = new Player("O", "Human 2");
 
   public static final Player NoOne = new Player(null, null);
-
-  private String symbol;
   private final String playerName;
+  private String symbol;
 
   private Player(String symbol, String playerName) {
     this.symbol = symbol;
@@ -22,21 +23,22 @@ public class Player {
   }
 
   static Player obtainPlayerBySymbol(String symbol) {
-    if ("X".equals(symbol)) {
-      return Human1;
-    } else if ("O".equals(symbol)) {
-      return Human2;
-    } else if ("C".equals(symbol)) {
-      return Robot;
-    }
-    return NoOne;
+    return Arrays.stream(new Player[]{Robot, Human1, Human2})
+        .filter(player -> player.getSymbol().equals(symbol))
+        .findFirst()
+        .orElse(NoOne);
+  }
+
+  public String name() {
+    return playerName;
   }
 
   public String getSymbol() {
     return symbol;
   }
 
-  public String name() {
-    return playerName;
+  void setSymbol(String symbolToChange) {
+    this.symbol = symbolToChange;
   }
+
 }
