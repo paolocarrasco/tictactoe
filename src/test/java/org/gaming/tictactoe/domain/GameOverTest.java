@@ -3,6 +3,8 @@ package org.gaming.tictactoe.domain;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.gaming.tictactoe.exceptions.NotValidMovementException;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -20,7 +22,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameHasWinnerInARow() {
+  public void shouldReturnTrueIsOverIfGameHasWinnerInARow() throws NotValidMovementException {
     game.move(new Coordinates(1, 0), Player.Human1);
     game.move(new Coordinates(1, 1), Player.Human1);
     game.move(new Coordinates(1, 2), Player.Human1);
@@ -29,7 +31,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameHasWinnerInAColumn() {
+  public void shouldReturnTrueIsOverIfGameHasWinnerInAColumn() throws NotValidMovementException {
     game.move(new Coordinates(1, 1), Player.Human2);
     game.move(new Coordinates(2, 1), Player.Human2);
     game.move(new Coordinates(0, 1), Player.Human2);
@@ -38,7 +40,8 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameHasWinnerInForwardDiagonal() {
+  public void shouldReturnTrueIsOverIfGameHasWinnerInForwardDiagonal() throws
+      NotValidMovementException {
     game.move(new Coordinates(0, 0), Player.Human2);
     game.move(new Coordinates(1, 1), Player.Human2);
     game.move(new Coordinates(2, 2), Player.Human2);
@@ -47,7 +50,8 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameHasWinnerInBackDiagonal() {
+  public void shouldReturnTrueIsOverIfGameHasWinnerInBackDiagonal() throws
+      NotValidMovementException {
     game.move(new Coordinates(0, 2), Player.Robot);
     game.move(new Coordinates(1, 1), Player.Robot);
     game.move(new Coordinates(2, 0), Player.Robot);
@@ -56,7 +60,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnTrueIsOverIfGameIsDraw() {
+  public void shouldReturnTrueIsOverIfGameIsDraw() throws NotValidMovementException {
     // x o c
     // x c x
     // o c o
@@ -74,7 +78,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenColumnIsWon() {
+  public void shouldReturnWinnerWhenColumnIsWon() throws NotValidMovementException {
     game.move(new Coordinates(1, 2), Player.Human2);
     game.move(new Coordinates(2, 2), Player.Human2);
     game.move(new Coordinates(0, 2), Player.Human2);
@@ -84,7 +88,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenRowIsWon() {
+  public void shouldReturnWinnerWhenRowIsWon() throws NotValidMovementException {
     game.move(new Coordinates(0, 2), Player.Human1);
     game.move(new Coordinates(0, 0), Player.Human1);
     game.move(new Coordinates(0, 1), Player.Human1);
@@ -94,7 +98,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenForwardDiagonalIsWon() {
+  public void shouldReturnWinnerWhenForwardDiagonalIsWon() throws NotValidMovementException {
     game.move(new Coordinates(0, 2), Player.Robot);
     game.move(new Coordinates(1, 1), Player.Robot);
     game.move(new Coordinates(2, 0), Player.Robot);
@@ -104,7 +108,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnWinnerWhenBackDiagonalIsWon() {
+  public void shouldReturnWinnerWhenBackDiagonalIsWon() throws NotValidMovementException {
     game.move(new Coordinates(0, 0), Player.Human2);
     game.move(new Coordinates(1, 1), Player.Human2);
     game.move(new Coordinates(2, 2), Player.Human2);
@@ -114,7 +118,7 @@ public class GameOverTest {
   }
 
   @Test
-  public void shouldReturnUnknownWhenThereIsDraw() {
+  public void shouldReturnUnknownWhenThereIsDraw() throws NotValidMovementException {
     game.move(new Coordinates(0, 0), Player.Human2);
     game.move(new Coordinates(0, 1), Player.Human1);
     game.move(new Coordinates(0, 2), Player.Robot);

@@ -1,5 +1,7 @@
 package org.gaming.tictactoe.domain;
 
+import org.gaming.tictactoe.exceptions.NotValidMovementException;
+
 /**
  * Base for the rules of the game.
  */
@@ -36,7 +38,18 @@ public abstract class Game {
     return player;
   }
 
-  public void move(Coordinates coordinates, Player player) {
+  public void move(Coordinates coordinates, Player player) throws NotValidMovementException {
+    try {
+      if (grid[coordinates.getX()][coordinates.getY()] != null) {
+        throw new NotValidMovementException("Slot was already played");
+      }
+    } catch (ArrayIndexOutOfBoundsException e) {
+      throw new NotValidMovementException(String.format(
+          "Coordinates numbers of slot should be between 0 and %d",
+          gridSize
+      ));
+    }
+
     grid[coordinates.getX()][coordinates.getY()] = player.getSymbol();
     movements++;
   }

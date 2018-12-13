@@ -17,15 +17,15 @@ public class GameControllerTest {
   private GameController gameController;
   private Game game;
   private ByteArrayOutputStream outputStream;
-  private WinnerContainer winnerContainer;
+  private MockedWinnerContainer mockedWinnerContainer;
 
   @Before
   public void setUp() {
-    winnerContainer = new WinnerContainer();
+    mockedWinnerContainer = new MockedWinnerContainer();
     game = new SimpleGame(new GameConfiguration(3)) {
       @Override
       public Player getWinner() {
-        return winnerContainer.getWinner();
+        return mockedWinnerContainer.getWinner();
       }
     };
     outputStream = new ByteArrayOutputStream();
@@ -67,22 +67,11 @@ public class GameControllerTest {
 
   @Test
   public void shouldShowPlayerNameWhenPrintingWinnerAndThereIsWinner() throws IOException {
-    winnerContainer.setWinner(Player.Robot);
+    mockedWinnerContainer.setWinner(Player.Robot);
     gameController.printWinner();
     outputStream.flush();
     String output = new String(outputStream.toByteArray());
     assertThat(output, is("Game is over! The winner was Robot.\n"));
   }
 
-  private class WinnerContainer {
-    private Player winner = Player.NoOne;
-
-    public Player getWinner() {
-      return winner;
-    }
-
-    public void setWinner(Player winner) {
-      this.winner = winner;
-    }
-  }
 }
