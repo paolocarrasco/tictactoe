@@ -22,7 +22,7 @@ public class GameControllerTest {
   @Before
   public void setUp() {
     mockedWinnerContainer = new MockedWinnerContainer();
-    game = new SimpleGame(new GameConfiguration(3)) {
+    game = new SimpleGame(new GameConfiguration(3, new Player[]{Player.Human1, Player.Human2})) {
       @Override
       public Player getWinner() {
         return mockedWinnerContainer.getWinner();

@@ -1,13 +1,19 @@
 package org.gaming.tictactoe.domain;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PlayerTest {
+
+  @After
+  public void tearDown() {
+    Player.Robot.setSymbol("C");
+  }
 
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
@@ -36,5 +42,12 @@ public class PlayerTest {
   public void shoulReturnPlayerIfSymbolIsCustomized() {
     Player.Robot.setSymbol("R");
     assertThat(Player.obtainPlayerBySymbol("R"), is(Player.Robot));
+  }
+
+  @Test
+  public void shouldBeEqualToAnotherPlayerIfTheyHaveTheSameName() {
+    assertThat(Player.Robot, is(not(equalTo(Player.Human1))));
+    assertThat(Player.Robot, is(not(equalTo(Player.Human2))));
+    assertThat(Player.Human1, is(not(equalTo(Player.Human2))));
   }
 }

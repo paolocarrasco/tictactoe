@@ -13,7 +13,11 @@ public class GameOverTest {
 
   @Before
   public void setUp() {
-    game = new SimpleGame(new GameConfiguration(3));
+    GameConfiguration configuration = new GameConfiguration(
+        3,
+        new Player[]{Player.Human1, Player.Human2}
+    );
+    game = new SimpleGame(configuration);
   }
 
   @Test

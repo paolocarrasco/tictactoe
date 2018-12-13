@@ -31,7 +31,7 @@ public abstract class Game {
   public Player nextPlayer() {
     Player player = players[turn++];
 
-    if (turn > 2) {
+    if (turn > players.length - 1) {
       turn = 0;
     }
 

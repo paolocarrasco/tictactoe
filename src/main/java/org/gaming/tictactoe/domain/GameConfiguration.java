@@ -8,13 +8,15 @@ public class GameConfiguration {
 
   private static final int MINIMUM_VALUE = 3;
   private static final int MAXIMUM_VALUE = 10;
+  private final Player[] players;
 
   private int size;
 
-  public GameConfiguration(int size) {
+  public GameConfiguration(int size, Player[] players) {
     this.size = size < MINIMUM_VALUE || size > MAXIMUM_VALUE
         ? DEFAULT_SIZE
         : size;
+    this.players = players;
   }
 
   public int getSize() {
@@ -22,6 +24,6 @@ public class GameConfiguration {
   }
 
   public Player[] getPlayers() {
-    return new Player[]{Player.Human1, Player.Human2, Player.Robot};
+    return players;
   }
 }

@@ -1,5 +1,6 @@
 package org.gaming.tictactoe.io;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +28,13 @@ public class GameSetupTest {
   @Before
   public void setUp() {
     gameSetup = new GameSetup();
+  }
+
+  @After
+  public void tearDown() {
+    Player.Robot.setSymbol("C");
+    Player.Human1.setSymbol("X");
+    Player.Human2.setSymbol("O");
   }
 
   @Test
@@ -75,5 +83,17 @@ public class GameSetupTest {
         .collect(Collectors.toList());
 
     assertThat(symbols, hasItems("C", "X", "O"));
+  }
+
+  @Test
+  public void shouldUseCustomPlayerSymbolsWhenTheyAreSet() {
+    URL configurationFile = getClass().getClassLoader().getResource("another-game.properties");
+    String fileLocation = configurationFile.getFile();
+    GameConfiguration configuration = gameSetup.read(fileLocation);
+    List<String> symbols = Arrays.stream(configuration.getPlayers())
+        .map(Player::getSymbol)
+        .collect(Collectors.toList());
+
+    assertThat(symbols, hasItems("R", "Y", "Z"));
   }
 }

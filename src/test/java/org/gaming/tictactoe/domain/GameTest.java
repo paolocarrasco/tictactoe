@@ -16,10 +16,12 @@ public class GameTest {
   public ExpectedException expectedException = ExpectedException.none();
 
   private Game game;
+  private Player[] players;
 
   @Before
   public void setUp() {
-    game = new SimpleGame(new GameConfiguration(3));
+    players = new Player[]{Player.Human1, Player.Human2, Player.Robot};
+    game = new SimpleGame(new GameConfiguration(3, players));
   }
 
   @Test
@@ -31,7 +33,7 @@ public class GameTest {
 
   @Test
   public void shouldHaveGridWithSizeConfigured() {
-    game = new SimpleGame(new GameConfiguration(4));
+    game = new SimpleGame(new GameConfiguration(4, players));
     String[][] grid = game.getGrid();
     String[][] expectedGrid = {
         {null, null, null, null},

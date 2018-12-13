@@ -28,10 +28,10 @@ public class GameController {
 
   public void enterNextMove() {
     Player player = this.game.nextPlayer();
-    Coordinates coordinates = requestNextMoveFor(player);
 
     do {
       try {
+        Coordinates coordinates = requestNextMoveFor(player);
         this.game.move(coordinates, player);
         break;
       } catch (InvalidMovementException e) {
