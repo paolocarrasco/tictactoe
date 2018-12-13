@@ -22,6 +22,6 @@ public class GameConfiguration {
   }
 
   public Player[] getPlayers() {
-    return Player.values();
+    return new Player[]{Player.Human1, Player.Human2, Player.Robot};
   }
 }
