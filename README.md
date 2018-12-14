@@ -7,6 +7,8 @@ It can be played by three people, one of them is an AI robot.
 Each of them can use the default symbols although they can be customized.
 The first turn is random!
 
+![How the game looks](https://media.giphy.com/media/7JBkg3fKumeX0xbBWU/giphy.gif)
+
 Requirements
 ------------
 
