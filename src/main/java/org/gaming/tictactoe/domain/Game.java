@@ -10,7 +10,7 @@ import org.gaming.tictactoe.exceptions.InvalidMovementException;
 public abstract class Game {
   final String[][] grid;
   final int gridSize;
-  private final Player[] players;
+  final Player[] players;
   int movements = 0;
   Player winner;
   private int turn;
@@ -19,8 +19,8 @@ public abstract class Game {
     gridSize = configuration.getSize();
     grid = new String[gridSize][gridSize];
     players = configuration.getPlayers();
-    winner = Player.NoOne;
-    turn = new Random(System.currentTimeMillis()).nextInt(3);
+    winner = PlayerContainer.NoOne;
+    turn = new Random(System.currentTimeMillis()).nextInt(players.length);
   }
 
   public abstract boolean isOver();
