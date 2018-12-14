@@ -63,3 +63,12 @@ In order to run the tests inside the application:
 ```console
 ./gradlew test
 ```
+
+If coverage is interesting, is it anything better than
+[mutation testing](https://en.wikipedia.org/wiki/Mutation_testing)?
+
+```console
+./gradlew pitest
+```
+
+(Check the `build/reports/pitest/index.html` file to see the results).
