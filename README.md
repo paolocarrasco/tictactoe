@@ -40,6 +40,7 @@ the `src/main/resources` folder in this project.
 You can configure the following properties (both are optional):
 - **size**: *number* - It will determine the size of the game grid.
 Since it is a square, we just need an integer number.
+If number goes beyond the boundaries (3-10) it will use default.
 - **symbols**: *letter,letter,letter* - They are the symbols that
 will be used by the players.
 
