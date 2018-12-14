@@ -14,6 +14,7 @@ import org.gaming.tictactoe.domain.GameConfiguration;
 import org.gaming.tictactoe.domain.Player;
 
 import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
+import static org.gaming.tictactoe.domain.PlayerContainer.*;
 
 /**
  * It allows to setup the game by reading a configuration file.
@@ -24,7 +25,7 @@ public class GameSetup {
   private static final String SIZE_PROPERTY_NAME = "size";
   private static final String DEFAULT_FILE_LOCATION = "game.properties";
 
-  private Set<Player> players = Stream.of(Player.Robot, Player.Human1, Player.Human2)
+  private Set<Player> players = Stream.of(Robot, Human1, Human2)
       .collect(Collectors.toSet());
 
   public GameConfiguration read() {
@@ -48,9 +49,9 @@ public class GameSetup {
       String symbolsRawValue = configuration.getProperty("symbols", null);
       if (symbolsRawValue != null) {
         String[] customSymbols = symbolsRawValue.split(",");
-        Player.Robot.setSymbol(customSymbols[0]);
-        Player.Human1.setSymbol(customSymbols[1]);
-        Player.Human2.setSymbol(customSymbols[2]);
+        Robot.setSymbol(customSymbols[0]);
+        Human1.setSymbol(customSymbols[1]);
+        Human2.setSymbol(customSymbols[2]);
       }
     } catch (IOException e) {
       String errorMessage = "There was an error while loading the configuration. "

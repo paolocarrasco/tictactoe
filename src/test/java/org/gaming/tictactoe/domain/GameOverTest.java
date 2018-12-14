@@ -8,6 +8,8 @@ import org.gaming.tictactoe.exceptions.InvalidMovementException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import static org.gaming.tictactoe.domain.PlayerContainer.*;
+
 public class GameOverTest {
   private Game game;
 
@@ -15,7 +17,7 @@ public class GameOverTest {
   public void setUp() {
     GameConfiguration configuration = new GameConfiguration(
         3,
-        new Player[]{Player.Human1, Player.Human2}
+        new Player[]{Human1, Human2, Robot}
     );
     game = new SimpleGame(configuration);
   }
@@ -27,18 +29,18 @@ public class GameOverTest {
 
   @Test
   public void shouldReturnTrueIsOverIfGameHasWinnerInARow() throws InvalidMovementException {
-    game.move(new Coordinates(1, 0), Player.Human1);
-    game.move(new Coordinates(1, 1), Player.Human1);
-    game.move(new Coordinates(1, 2), Player.Human1);
+    game.move(new Coordinates(1, 0), Human1);
+    game.move(new Coordinates(1, 1), Human1);
+    game.move(new Coordinates(1, 2), Human1);
 
     assertThat(game.isOver(), is(true));
   }
 
   @Test
   public void shouldReturnTrueIsOverIfGameHasWinnerInAColumn() throws InvalidMovementException {
-    game.move(new Coordinates(1, 1), Player.Human2);
-    game.move(new Coordinates(2, 1), Player.Human2);
-    game.move(new Coordinates(0, 1), Player.Human2);
+    game.move(new Coordinates(1, 1), Human2);
+    game.move(new Coordinates(2, 1), Human2);
+    game.move(new Coordinates(0, 1), Human2);
 
     assertThat(game.isOver(), is(true));
   }
@@ -46,9 +48,9 @@ public class GameOverTest {
   @Test
   public void shouldReturnTrueIsOverIfGameHasWinnerInForwardDiagonal() throws
       InvalidMovementException {
-    game.move(new Coordinates(0, 0), Player.Human2);
-    game.move(new Coordinates(1, 1), Player.Human2);
-    game.move(new Coordinates(2, 2), Player.Human2);
+    game.move(new Coordinates(0, 0), Human2);
+    game.move(new Coordinates(1, 1), Human2);
+    game.move(new Coordinates(2, 2), Human2);
 
     assertThat(game.isOver(), is(true));
   }
@@ -56,9 +58,9 @@ public class GameOverTest {
   @Test
   public void shouldReturnTrueIsOverIfGameHasWinnerInBackDiagonal() throws
       InvalidMovementException {
-    game.move(new Coordinates(0, 2), Player.Robot);
-    game.move(new Coordinates(1, 1), Player.Robot);
-    game.move(new Coordinates(2, 0), Player.Robot);
+    game.move(new Coordinates(0, 2), Robot);
+    game.move(new Coordinates(1, 1), Robot);
+    game.move(new Coordinates(2, 0), Robot);
 
     assertThat(game.isOver(), is(true));
   }
@@ -68,72 +70,72 @@ public class GameOverTest {
     // x o c
     // x c x
     // o c o
-    game.move(new Coordinates(0, 0), Player.Human2);
-    game.move(new Coordinates(0, 1), Player.Human1);
-    game.move(new Coordinates(0, 2), Player.Robot);
-    game.move(new Coordinates(1, 0), Player.Human2);
-    game.move(new Coordinates(1, 1), Player.Robot);
-    game.move(new Coordinates(1, 2), Player.Human2);
-    game.move(new Coordinates(2, 0), Player.Human1);
-    game.move(new Coordinates(2, 1), Player.Robot);
-    game.move(new Coordinates(2, 2), Player.Human1);
+    game.move(new Coordinates(0, 0), Human2);
+    game.move(new Coordinates(0, 1), Human1);
+    game.move(new Coordinates(0, 2), Robot);
+    game.move(new Coordinates(1, 0), Human2);
+    game.move(new Coordinates(1, 1), Robot);
+    game.move(new Coordinates(1, 2), Human2);
+    game.move(new Coordinates(2, 0), Human1);
+    game.move(new Coordinates(2, 1), Robot);
+    game.move(new Coordinates(2, 2), Human1);
 
     assertThat(game.isOver(), is(true));
   }
 
   @Test
   public void shouldReturnWinnerWhenColumnIsWon() throws InvalidMovementException {
-    game.move(new Coordinates(1, 2), Player.Human2);
-    game.move(new Coordinates(2, 2), Player.Human2);
-    game.move(new Coordinates(0, 2), Player.Human2);
+    game.move(new Coordinates(1, 2), Human2);
+    game.move(new Coordinates(2, 2), Human2);
+    game.move(new Coordinates(0, 2), Human2);
 
     game.isOver();
-    assertThat(game.getWinner(), is(Player.Human2));
+    assertThat(game.getWinner(), is(Human2));
   }
 
   @Test
   public void shouldReturnWinnerWhenRowIsWon() throws InvalidMovementException {
-    game.move(new Coordinates(0, 2), Player.Human1);
-    game.move(new Coordinates(0, 0), Player.Human1);
-    game.move(new Coordinates(0, 1), Player.Human1);
+    game.move(new Coordinates(0, 2), Human1);
+    game.move(new Coordinates(0, 0), Human1);
+    game.move(new Coordinates(0, 1), Human1);
 
     game.isOver();
-    assertThat(game.getWinner(), is(Player.Human1));
+    assertThat(game.getWinner(), is(Human1));
   }
 
   @Test
   public void shouldReturnWinnerWhenForwardDiagonalIsWon() throws InvalidMovementException {
-    game.move(new Coordinates(0, 2), Player.Robot);
-    game.move(new Coordinates(1, 1), Player.Robot);
-    game.move(new Coordinates(2, 0), Player.Robot);
+    game.move(new Coordinates(0, 2), Robot);
+    game.move(new Coordinates(1, 1), Robot);
+    game.move(new Coordinates(2, 0), Robot);
 
     game.isOver();
-    assertThat(game.getWinner(), is(Player.Robot));
+    assertThat(game.getWinner(), is(Robot));
   }
 
   @Test
   public void shouldReturnWinnerWhenBackDiagonalIsWon() throws InvalidMovementException {
-    game.move(new Coordinates(0, 0), Player.Human2);
-    game.move(new Coordinates(1, 1), Player.Human2);
-    game.move(new Coordinates(2, 2), Player.Human2);
+    game.move(new Coordinates(0, 0), Human2);
+    game.move(new Coordinates(1, 1), Human2);
+    game.move(new Coordinates(2, 2), Human2);
 
     game.isOver();
-    assertThat(game.getWinner(), is(Player.Human2));
+    assertThat(game.getWinner(), is(Human2));
   }
 
   @Test
   public void shouldReturnUnknownWhenThereIsDraw() throws InvalidMovementException {
-    game.move(new Coordinates(0, 0), Player.Human2);
-    game.move(new Coordinates(0, 1), Player.Human1);
-    game.move(new Coordinates(0, 2), Player.Robot);
-    game.move(new Coordinates(1, 0), Player.Human2);
-    game.move(new Coordinates(1, 1), Player.Robot);
-    game.move(new Coordinates(1, 2), Player.Human2);
-    game.move(new Coordinates(2, 0), Player.Human1);
-    game.move(new Coordinates(2, 1), Player.Robot);
-    game.move(new Coordinates(2, 2), Player.Human1);
+    game.move(new Coordinates(0, 0), Human2);
+    game.move(new Coordinates(0, 1), Human1);
+    game.move(new Coordinates(0, 2), Robot);
+    game.move(new Coordinates(1, 0), Human2);
+    game.move(new Coordinates(1, 1), Robot);
+    game.move(new Coordinates(1, 2), Human2);
+    game.move(new Coordinates(2, 0), Human1);
+    game.move(new Coordinates(2, 1), Robot);
+    game.move(new Coordinates(2, 2), Human1);
 
     game.isOver();
-    assertThat(game.getWinner(), is(Player.NoOne));
+    assertThat(game.getWinner(), is(NoOne));
   }
 }

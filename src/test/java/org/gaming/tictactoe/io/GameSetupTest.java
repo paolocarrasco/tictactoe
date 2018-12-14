@@ -17,6 +17,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.gaming.tictactoe.domain.GameConfiguration.DEFAULT_SIZE;
+import static org.gaming.tictactoe.domain.PlayerContainer.*;
 
 @SuppressWarnings("ConstantConditions")
 public class GameSetupTest {
@@ -32,9 +33,9 @@ public class GameSetupTest {
 
   @After
   public void tearDown() {
-    Player.Robot.setSymbol("C");
-    Player.Human1.setSymbol("X");
-    Player.Human2.setSymbol("O");
+    Robot.setSymbol("C");
+    Human1.setSymbol("X");
+    Human2.setSymbol("O");
   }
 
   @Test

@@ -1,32 +1,29 @@
 package org.gaming.tictactoe.domain;
 
+import java.util.Random;
+
 import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 /**
  * Base for the rules of the game.
  */
 public abstract class Game {
-  int movements = 0;
-  Player winner;
-
   final String[][] grid;
   final int gridSize;
-
   private final Player[] players;
-  private int turn = 0;
+  int movements = 0;
+  Player winner;
+  private int turn;
 
   Game(GameConfiguration configuration) {
     gridSize = configuration.getSize();
     grid = new String[gridSize][gridSize];
     players = configuration.getPlayers();
     winner = Player.NoOne;
+    turn = new Random(System.currentTimeMillis()).nextInt(3);
   }
 
   public abstract boolean isOver();
-
-  public String[][] getGrid() {
-    return grid;
-  }
 
   public Player nextPlayer() {
     Player player = players[turn++];
@@ -52,6 +49,10 @@ public abstract class Game {
 
     grid[coordinates.getX()][coordinates.getY()] = player.getSymbol();
     movements++;
+  }
+
+  public String[][] getGrid() {
+    return grid;
   }
 
   public Player getWinner() {

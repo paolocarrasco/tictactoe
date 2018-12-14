@@ -6,16 +6,16 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import static org.gaming.tictactoe.domain.PlayerContainer.Human1;
+import static org.gaming.tictactoe.domain.PlayerContainer.Human2;
+
 public class GameConfigurationTest {
   private static final int DEFAULT_SIZE_VALUE = 3;
   private Player[] players;
 
   @Before
   public void setUp() {
-    players = new Player[]{
-        Player.Human1,
-        Player.Human2,
-    };
+    players = new Player[]{Human1, Human2};
   }
 
   @Test

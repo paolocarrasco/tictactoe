@@ -11,6 +11,8 @@ import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 import static java.util.Optional.ofNullable;
 
+import static org.gaming.tictactoe.domain.PlayerContainer.NoOne;
+
 /**
  * It allows the interaction with the game: entering the movement, see the status.
  */
@@ -75,7 +77,7 @@ public class GameController {
     out.print("Game is over! ");
     Player winner = this.game.getWinner();
 
-    if (winner == Player.NoOne) {
+    if (winner == NoOne) {
       out.println("It was a draw...");
     } else {
       out.printf("The winner was %s.%n", winner.name());

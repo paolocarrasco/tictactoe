@@ -1,5 +1,7 @@
 package org.gaming.tictactoe.domain;
 
+import static org.gaming.tictactoe.domain.PlayerContainer.obtainPlayerBySymbol;
+
 /**
  * It applies the rules of the game.
  */
@@ -45,7 +47,7 @@ public class SimpleGame extends Game {
       }
 
       if (counterSymbolY == gridSize) {
-        winner = Player.obtainPlayerBySymbol(symbolY);
+        winner = obtainPlayerBySymbol(symbolY, players);
         return true;
       }
     }
@@ -74,7 +76,7 @@ public class SimpleGame extends Game {
         }
       }
       if (counterSymbolX == gridSize) {
-        winner = Player.obtainPlayerBySymbol(symbolX);
+        winner = obtainPlayerBySymbol(symbolX, players);
         return true;
       }
     }
@@ -102,7 +104,7 @@ public class SimpleGame extends Game {
       }
 
       if (counterSymbolD == gridSize) {
-        winner = Player.obtainPlayerBySymbol(symbolD);
+        winner = obtainPlayerBySymbol(symbolD, players);
         return true;
       }
     }
@@ -131,7 +133,7 @@ public class SimpleGame extends Game {
       }
 
       if (counterSymbolD == gridSize) {
-        winner = Player.obtainPlayerBySymbol(symbolD);
+        winner = obtainPlayerBySymbol(symbolD, players);
         return true;
       }
     }

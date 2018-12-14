@@ -1,6 +1,7 @@
 package org.gaming.tictactoe.domain;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -8,46 +9,54 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class PlayerTest {
+import static org.gaming.tictactoe.domain.PlayerContainer.*;
 
-  @After
-  public void tearDown() {
-    Player.Robot.setSymbol("C");
-  }
+public class PlayerTest {
 
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
+  private Player[] players;
+
+  @Before
+  public void setUp() {
+    players = new Player[]{Human1, Human2, Robot};
+  }
+
+  @After
+  public void tearDown() {
+    Robot.setSymbol("C");
+  }
 
   @Test
   public void shouldReturnPlayer1IfSymbolIsXWithDefaultForIt() {
-    assertThat(Player.obtainPlayerBySymbol("X"), is(Player.Human1));
+    assertThat(obtainPlayerBySymbol("X", players), is(Human1));
   }
 
   @Test
   public void shouldReturnPlayer2IfSymbolIsXWithDefaultForIt() {
-    assertThat(Player.obtainPlayerBySymbol("O"), is(Player.Human2));
+    assertThat(obtainPlayerBySymbol("O", players), is(Human2));
   }
 
   @Test
   public void shouldReturnRobotIfSymbolIsXWithDefaultForIt() {
-    assertThat(Player.obtainPlayerBySymbol("C"), is(Player.Robot));
+    assertThat(obtainPlayerBySymbol("C", players), is(Robot));
   }
 
   @Test
   public void shouldReturnNoOneIfSymbolIsNull() {
-    assertThat(Player.obtainPlayerBySymbol(null), is(Player.NoOne));
+    assertThat(obtainPlayerBySymbol(null, players), is(NoOne));
   }
 
   @Test
   public void shoulReturnPlayerIfSymbolIsCustomized() {
-    Player.Robot.setSymbol("R");
-    assertThat(Player.obtainPlayerBySymbol("R"), is(Player.Robot));
+    Robot.setSymbol("R");
+    assertThat(obtainPlayerBySymbol("R", players), is(Robot));
   }
 
   @Test
   public void shouldBeEqualToAnotherPlayerIfTheyHaveTheSameName() {
-    assertThat(Player.Robot, is(not(equalTo(Player.Human1))));
-    assertThat(Player.Robot, is(not(equalTo(Player.Human2))));
-    assertThat(Player.Human1, is(not(equalTo(Player.Human2))));
+    assertThat(Robot, is(not(equalTo(Human1))));
+    assertThat(Robot, is(not(equalTo(Human2))));
+    assertThat(Human1, is(not(equalTo(Human2))));
   }
 }

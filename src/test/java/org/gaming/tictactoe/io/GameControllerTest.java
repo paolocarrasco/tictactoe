@@ -12,6 +12,8 @@ import org.gaming.tictactoe.domain.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import static org.gaming.tictactoe.domain.PlayerContainer.*;
+
 public class GameControllerTest {
 
   private GameController gameController;
@@ -22,7 +24,7 @@ public class GameControllerTest {
   @Before
   public void setUp() {
     mockedWinnerContainer = new MockedWinnerContainer();
-    game = new SimpleGame(new GameConfiguration(3, new Player[]{Player.Human1, Player.Human2})) {
+    game = new SimpleGame(new GameConfiguration(3, new Player[]{Human1, Human2})) {
       @Override
       public Player getWinner() {
         return mockedWinnerContainer.getWinner();
@@ -67,7 +69,7 @@ public class GameControllerTest {
 
   @Test
   public void shouldShowPlayerNameWhenPrintingWinnerAndThereIsWinner() throws IOException {
-    mockedWinnerContainer.setWinner(Player.Robot);
+    mockedWinnerContainer.setWinner(Robot);
     gameController.printWinner();
     outputStream.flush();
     String output = new String(outputStream.toByteArray());
