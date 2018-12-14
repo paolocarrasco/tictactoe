@@ -3,7 +3,8 @@ package org.gaming.tictactoe.domain;
 import static org.gaming.tictactoe.domain.PlayerContainer.obtainPlayerBySymbol;
 
 /**
- * It applies the rules of the game.
+ * It applies the rules of the game by using simple calculations.
+ * Use brute force algorithm to determine if there is a winner and if the game is over.
  */
 public class SimpleGame extends Game {
 
