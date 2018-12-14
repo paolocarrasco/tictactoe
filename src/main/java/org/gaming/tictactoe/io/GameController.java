@@ -43,38 +43,6 @@ public class GameController {
     } while (true);
   }
 
-  private void showInvalidMovement() {
-    out.println("Invalid movement! Try again.");
-  }
-
-  private Coordinates requestNextMoveFor(Player player) {
-    if (player instanceof AiPlayer) {
-      Coordinates coordinates = ((AiPlayer) player).calculateMove(game.getGrid());
-      out.printf(
-          "%s turn: Wisely admire its movement: (%s).%n"
-              + "Reflect how lucky you are to play against him%n",
-          player.name(),
-          coordinates.toString(),
-          game.getSize()
-      );
-      return coordinates;
-    }
-    out.printf(
-        "%s turn: Please enter coordinates separated by comma.\n"
-            + "They should be zero-based and less than %d%n",
-        player.name(),
-        game.getSize()
-    );
-    String input = readInput();
-    String[] coordinates = input.split(",");
-
-    return new Coordinates(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-  }
-
-  String readInput() {
-    return scanner.next();
-  }
-
   public void printSnapshot() {
     String[][] grid = this.game.getGrid();
 
@@ -98,6 +66,61 @@ public class GameController {
     } else {
       out.printf("The winner was %s.%n", winner.name());
     }
+  }
+
+  String readInput() {
+    return scanner.next();
+  }
+
+  private Coordinates requestNextMoveFor(Player player) {
+    return player instanceof AiPlayer
+        ? getCoordinatesFromAiPlayer(player)
+        : getCoordinatesFromNormalPlayer(player);
+
+  }
+
+  private Coordinates getCoordinatesFromAiPlayer(Player player) {
+    Coordinates coordinates = ((AiPlayer) player).calculateMove(game.getGrid());
+    out.printf(
+        "%s turn: Wisely admire its movement: (%s).%n"
+            + "Reflect how lucky you are to play against him%n",
+        player.name(),
+        coordinates.toString()
+    );
+    return coordinates;
+  }
+
+  private Coordinates getCoordinatesFromNormalPlayer(Player player) {
+    String input;
+    boolean isValidInput;
+
+    do {
+      out.printf(
+          "%s turn: Please enter coordinates separated by comma.\n"
+              + "They should be zero-based and less than %d%n",
+          player.name(),
+          game.getSize()
+      );
+      input = readInput();
+      isValidInput = evaluateIfAreValidCoordinates(input);
+
+      if (!isValidInput) {
+        showInvalidMovement();
+      }
+    }
+    while (!isValidInput);
+
+    String[] coordinates = input.split(",");
+
+    return new Coordinates(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+  }
+
+  private boolean evaluateIfAreValidCoordinates(String input) {
+    return input.matches("^\\d+,\\d+$");
+  }
+
+  private void showInvalidMovement() {
+    out.println("Invalid movement! Try again.");
   }
 
   @Override
