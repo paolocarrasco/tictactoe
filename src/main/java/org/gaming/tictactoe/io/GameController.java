@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import org.gaming.tictactoe.domain.AiPlayer;
 import org.gaming.tictactoe.domain.Coordinates;
 import org.gaming.tictactoe.domain.Game;
 import org.gaming.tictactoe.domain.Player;
@@ -46,17 +47,32 @@ public class GameController {
     out.println("Invalid movement! Try again.");
   }
 
-  Coordinates requestNextMoveFor(Player player) {
+  private Coordinates requestNextMoveFor(Player player) {
+    if (player instanceof AiPlayer) {
+      Coordinates coordinates = ((AiPlayer) player).calculateMove(game.getGrid());
+      out.printf(
+          "%s turn: Wisely admire its movement: (%s).%n"
+              + "Reflect how lucky you are to play against him%n",
+          player.name(),
+          coordinates.toString(),
+          game.getSize()
+      );
+      return coordinates;
+    }
     out.printf(
         "%s turn: Please enter coordinates separated by comma.\n"
             + "They should be zero-based and less than %d%n",
         player.name(),
         game.getSize()
     );
-    String input = scanner.next();
+    String input = readInput();
     String[] coordinates = input.split(",");
 
     return new Coordinates(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+  }
+
+  String readInput() {
+    return scanner.next();
   }
 
   public void printSnapshot() {

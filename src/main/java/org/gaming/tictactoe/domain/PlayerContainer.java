@@ -7,13 +7,13 @@ import java.util.Arrays;
  */
 public final class PlayerContainer {
 
-  public static final Player Robot = new Player("C", "Robot");
+  public static final Player Robot = new AiPlayer("C");
   public static final Player Human1 = new Player("X", "Human 1");
   public static final Player Human2 = new Player("O", "Human 2");
   public static final Player NoOne = new Player(null, "No one");
 
   private PlayerContainer() {
-    // to avoid instantiation.
+    // To avoid instantiation.
   }
 
   static Player obtainPlayerBySymbol(String symbol, Player[] players) {
