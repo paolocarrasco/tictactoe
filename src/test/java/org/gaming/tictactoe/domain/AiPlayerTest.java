@@ -12,12 +12,12 @@ import static org.gaming.tictactoe.domain.PlayerContainer.Human1;
 
 public class AiPlayerTest {
 
-  private AiPlayer robot;
+  private DumbAiPlayer robot;
   private Game game;
 
   @Before
   public void setUp() {
-    robot = new AiPlayer("R");
+    robot = new DumbAiPlayer("R");
     game = new SimpleGame(new GameConfiguration(3, new Player[]{Human1, robot}));
   }
 

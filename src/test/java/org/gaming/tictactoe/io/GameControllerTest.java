@@ -55,7 +55,7 @@ public class GameControllerTest {
 
   @Test
   public void shouldAskForCoordinatesWhenEnteringNextMoveOfRobot() {
-    Player mockedRobot = new AiPlayer("C") {
+    Player mockedRobot = new DumbAiPlayer("C") {
       @Override
       public Coordinates calculateMove(String[][] grid) {
         return new Coordinates(2,2);

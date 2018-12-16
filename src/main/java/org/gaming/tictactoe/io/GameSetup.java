@@ -25,7 +25,7 @@ public class GameSetup {
   private static final String SIZE_PROPERTY_NAME = "size";
   private static final String DEFAULT_FILE_LOCATION = "game.properties";
 
-  private Set<Player> players = Stream.of(Robot, Human1, Human2)
+  private final Set<Player> players = Stream.of(Robot, Human1, Human2)
       .collect(Collectors.toSet());
 
   public GameConfiguration read() {

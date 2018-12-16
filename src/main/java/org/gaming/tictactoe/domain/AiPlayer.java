@@ -1,20 +1,15 @@
 package org.gaming.tictactoe.domain;
 
-public class AiPlayer extends Player {
-  protected AiPlayer(String symbol) {
-    super(symbol, "Robot");
-  }
+/**
+ * Represents a player that does not need human intervention.
+ * It can play by itself.
+ */
+public interface AiPlayer {
 
-  public Coordinates calculateMove(String[][] grid) {
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid.length; j++) {
-        if (grid[i][j] == null) {
-          return new Coordinates(i, j);
-        }
-      }
-    }
-    // This should not happen since it would mean that the grid is full
-    // (impossible if the we are frequently checking if the game is over).
-    return null;
-  }
+  /**
+   * Based on the state of the grid, it can calculate its next move.
+   *
+   * @return the coordinates of the next move of the AI player.
+   */
+  Coordinates calculateMove(String[][] grid);
 }

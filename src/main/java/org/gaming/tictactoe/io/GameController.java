@@ -4,10 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import org.gaming.tictactoe.domain.AiPlayer;
-import org.gaming.tictactoe.domain.Coordinates;
-import org.gaming.tictactoe.domain.Game;
-import org.gaming.tictactoe.domain.Player;
+import org.gaming.tictactoe.domain.*;
 import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 import static java.util.Optional.ofNullable;
