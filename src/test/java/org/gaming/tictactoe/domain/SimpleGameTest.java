@@ -3,6 +3,8 @@ package org.gaming.tictactoe.domain;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -10,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.gaming.tictactoe.domain.PlayerContainer.*;
 
-public class GameOverTest {
+public class SimpleGameTest {
   private Game game;
 
   @Before
@@ -124,6 +126,12 @@ public class GameOverTest {
   }
 
   @Test
+  public void shouldReturnAllCoordinatesWhenStartingGameOnGetAvailableMoves() {
+    List<Coordinates> availableMoves = game.getAvailableMoves();
+    assertThat(availableMoves.size(), is(9));
+  }
+
+  @Test
   public void shouldReturnUnknownWhenThereIsDraw() throws InvalidMovementException {
     game.move(new Coordinates(0, 0), Human2);
     game.move(new Coordinates(0, 1), Human1);
@@ -137,5 +145,20 @@ public class GameOverTest {
 
     game.isOver();
     assertThat(game.getWinner(), is(NoOne));
+  }
+
+  @Test
+  public void shouldReturnOnlyAMoveWhenThereIsOnlyTheLastMoveOnGetAvailableMoves() {
+    String[][] grid = new String[][]{{"C", "X", null}, {"X", "C", "X"}, {"X", "C", "C"}};
+    SimpleGame endingGame = new SimpleGame(
+        new GameConfiguration(3, new Player[]{Human1, Robot}),
+        grid
+    );
+
+    List<Coordinates> availableMoves = endingGame.getAvailableMoves();
+
+    Coordinates lastMove = new Coordinates(0, 2);
+    assertThat(availableMoves.get(0).getX(), is(lastMove.getX()));
+    assertThat(availableMoves.get(0).getY(), is(lastMove.getY()));
   }
 }

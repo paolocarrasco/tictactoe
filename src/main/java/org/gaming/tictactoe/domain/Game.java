@@ -1,5 +1,6 @@
 package org.gaming.tictactoe.domain;
 
+import java.util.List;
 import java.util.Random;
 
 import org.gaming.tictactoe.exceptions.InvalidMovementException;
@@ -66,4 +67,6 @@ public abstract class Game {
   public int getSize() {
     return gridSize;
   }
+
+  public abstract List<Coordinates> getAvailableMoves();
 }

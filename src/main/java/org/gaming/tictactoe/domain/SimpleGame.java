@@ -1,5 +1,8 @@
 package org.gaming.tictactoe.domain;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.gaming.tictactoe.domain.PlayerContainer.obtainPlayerBySymbol;
 
 /**
@@ -23,6 +26,21 @@ public class SimpleGame extends Game {
         || evaluateWinnerInForwardDiagonal()
         || evaluateWinnerInBackDiagonal()
         || evaluateDraw();
+  }
+
+  @Override
+  public List<Coordinates> getAvailableMoves() {
+    LinkedList<Coordinates> availableMoves = new LinkedList<>();
+
+    for (int i = 0; i < gridSize; i++) {
+      for (int j = 0; j < gridSize; j++) {
+        if (grid[i][j] == null) {
+          availableMoves.add(new Coordinates(i, j));
+        }
+      }
+    }
+
+    return availableMoves;
   }
 
   private boolean evaluateDraw() {
