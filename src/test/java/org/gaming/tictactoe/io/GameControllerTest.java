@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import org.gaming.tictactoe.domain.*;
+import org.gaming.tictactoe.domain.ai.DumbAiPlayer;
 import org.gaming.tictactoe.helpers.MockablePlayerContainer;
 
 import static org.hamcrest.CoreMatchers.*;

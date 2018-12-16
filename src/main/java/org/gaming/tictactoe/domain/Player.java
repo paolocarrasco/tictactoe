@@ -10,7 +10,7 @@ public class Player {
   private final String playerName;
   private String symbol;
 
-  Player(String symbol, String playerName) {
+  protected Player(String symbol, String playerName) {
     this.symbol = symbol;
     this.playerName = playerName;
   }

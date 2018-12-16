@@ -2,6 +2,8 @@ package org.gaming.tictactoe.domain;
 
 import java.util.Arrays;
 
+import org.gaming.tictactoe.domain.ai.DumbAiPlayer;
+
 /**
  * The only purpose of this class is to hold the players that we have in the game.
  */

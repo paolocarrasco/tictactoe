@@ -1,10 +1,14 @@
-package org.gaming.tictactoe.domain;
+package org.gaming.tictactoe.domain.ai;
+
+import org.gaming.tictactoe.domain.AiPlayer;
+import org.gaming.tictactoe.domain.Coordinates;
+import org.gaming.tictactoe.domain.Player;
 
 /**
  * Simple AI player that only looks for the next available position.
  */
 public class DumbAiPlayer extends Player implements AiPlayer {
-  protected DumbAiPlayer(String symbol) {
+  public DumbAiPlayer(String symbol) {
     super(symbol, "Robot");
   }
 
