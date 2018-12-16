@@ -11,5 +11,5 @@ public interface AiPlayer {
    *
    * @return the coordinates of the next move of the AI player.
    */
-  Coordinates calculateMove(String[][] grid);
+  Coordinates calculateMove(Game game);
 }

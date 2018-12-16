@@ -77,7 +77,7 @@ public class GameController {
   }
 
   private Coordinates getCoordinatesFromAiPlayer(Player player) {
-    Coordinates coordinates = ((AiPlayer) player).calculateMove(game.getGrid());
+    Coordinates coordinates = ((AiPlayer) player).calculateMove(game);
     out.printf(
         "%s turn: Wisely admire its movement: (%s).%n"
             + "Reflect how lucky you are to play against him%n",

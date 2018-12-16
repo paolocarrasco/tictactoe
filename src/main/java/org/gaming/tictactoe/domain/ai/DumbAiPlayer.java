@@ -2,6 +2,7 @@ package org.gaming.tictactoe.domain.ai;
 
 import org.gaming.tictactoe.domain.AiPlayer;
 import org.gaming.tictactoe.domain.Coordinates;
+import org.gaming.tictactoe.domain.Game;
 import org.gaming.tictactoe.domain.Player;
 
 /**
@@ -13,7 +14,9 @@ public class DumbAiPlayer extends Player implements AiPlayer {
   }
 
   @Override
-  public Coordinates calculateMove(String[][] grid) {
+  public Coordinates calculateMove(Game game) {
+    String[][] grid = game.getGrid();
+
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid.length; j++) {
         if (grid[i][j] == null) {

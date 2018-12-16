@@ -29,7 +29,7 @@ public class DumbAiPlayerTest {
 
   @Test
   public void shouldConsiderTheFirstPositionWhenStartingTheGame() {
-    Coordinates coordinates = robot.calculateMove(game.getGrid());
+    Coordinates coordinates = robot.calculateMove(game);
     assertThat(coordinates.getX(), is(0));
     assertThat(coordinates.getY(), is(0));
   }
@@ -38,7 +38,7 @@ public class DumbAiPlayerTest {
   public void shouldConsiderNextAvailablePositionAfterAMovement() throws InvalidMovementException {
     game.move(new Coordinates(0, 0), Human1);
     game.move(new Coordinates(0, 1), Human1);
-    Coordinates coordinates = robot.calculateMove(game.getGrid());
+    Coordinates coordinates = robot.calculateMove(game);
     assertThat(coordinates.getX(), is(0));
     assertThat(coordinates.getY(), is(2));
   }
