@@ -24,7 +24,7 @@ public class DumbAiPlayerTest {
 
   @Test
   public void shouldHaveDefaultNameRobot() {
-    assertThat(robot.name(), is("Robot"));
+    assertThat(robot.name(), is("Simple Robot"));
   }
 
   @Test

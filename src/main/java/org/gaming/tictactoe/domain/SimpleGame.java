@@ -2,6 +2,7 @@ package org.gaming.tictactoe.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import static org.gaming.tictactoe.domain.PlayerContainer.obtainPlayerBySymbol;
 
@@ -12,11 +13,14 @@ import static org.gaming.tictactoe.domain.PlayerContainer.obtainPlayerBySymbol;
 public class SimpleGame extends Game {
 
   public SimpleGame(GameConfiguration configuration) {
-    super(configuration);
+    this(configuration, new String[configuration.getSize()][configuration.getSize()],
+        new Random(System.currentTimeMillis()).nextInt(configuration.getPlayers().length),
+        0
+    );
   }
 
-  public SimpleGame(GameConfiguration gameConfiguration, String[][] grid) {
-    super(gameConfiguration, grid);
+  public SimpleGame(GameConfiguration configuration, String[][] grid, int turn, int movements) {
+    super(configuration, grid, turn, movements);
   }
 
   @Override
@@ -41,6 +45,23 @@ public class SimpleGame extends Game {
     }
 
     return availableMoves;
+  }
+
+  @Override
+  public Game copy() {
+    GameConfiguration gameConfiguration = new GameConfiguration(gridSize, players);
+
+    String[][] copiedGrid = new String[gridSize][];
+    for (int i = 0; i < gridSize; i++) {
+      copiedGrid[i] = grid[i].clone();
+    }
+
+    return new SimpleGame(
+        gameConfiguration,
+        copiedGrid,
+        turn,
+        movements
+    );
   }
 
   private boolean evaluateDraw() {

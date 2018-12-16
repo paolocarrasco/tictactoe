@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.gaming.tictactoe.exceptions.InvalidMovementException;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.gaming.tictactoe.domain.PlayerContainer.*;
@@ -150,15 +150,43 @@ public class SimpleGameTest {
   @Test
   public void shouldReturnOnlyAMoveWhenThereIsOnlyTheLastMoveOnGetAvailableMoves() {
     String[][] grid = new String[][]{{"C", "X", null}, {"X", "C", "X"}, {"X", "C", "C"}};
-    SimpleGame endingGame = new SimpleGame(
-        new GameConfiguration(3, new Player[]{Human1, Robot}),
-        grid
-    );
+    GameConfiguration configuration = new GameConfiguration(3, new Player[]{Human1, Robot});
+    SimpleGame endingGame = new SimpleGame(configuration, grid, 0, 0);
 
     List<Coordinates> availableMoves = endingGame.getAvailableMoves();
 
     Coordinates lastMove = new Coordinates(0, 2);
     assertThat(availableMoves.get(0).getX(), is(lastMove.getX()));
     assertThat(availableMoves.get(0).getY(), is(lastMove.getY()));
+  }
+
+  @Test
+  public void shouldSendTheCurrentStateToTheCopy() throws InvalidMovementException {
+    GameConfiguration configuration = new GameConfiguration(4, new Player[]{Human1, Human2});
+    Game baseGame = new SimpleGame(configuration);
+    baseGame.move(new Coordinates(0, 0), Human2);
+    baseGame.move(new Coordinates(0, 1), Human1);
+
+    Game copiedGame = baseGame.copy();
+
+    assertThat(copiedGame.getSize(), is(4));
+    assertThat(copiedGame.turn, is(baseGame.turn));
+    assertThat(copiedGame.players, is(baseGame.players));
+    assertThat(copiedGame.grid, is(not(sameInstance(baseGame.grid))));
+    assertThat(copiedGame.grid[0][1], is(Human1.getSymbol()));
+    assertThat(copiedGame.grid[0][0], is(Human2.getSymbol()));
+  }
+
+  @Test
+  public void shouldNotAffectOriginalGameTheChangesMadeToCopiedGame() throws
+      InvalidMovementException {
+    GameConfiguration configuration = new GameConfiguration(4, new Player[]{Human1, Human2});
+    Game baseGame = new SimpleGame(configuration);
+
+    Game copiedGame = baseGame.copy();
+    copiedGame.move(new Coordinates(1, 0), Human2);
+
+    assertThat(copiedGame.grid[1][0], is(Human2.getSymbol()));
+    assertThat(baseGame.grid[1][0], is(nullValue()));
   }
 }

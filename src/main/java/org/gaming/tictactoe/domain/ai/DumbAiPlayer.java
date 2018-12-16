@@ -10,7 +10,7 @@ import org.gaming.tictactoe.domain.Player;
  */
 public class DumbAiPlayer extends Player implements AiPlayer {
   public DumbAiPlayer(String symbol) {
-    super(symbol, "Robot");
+    super(symbol, "Simple Robot");
   }
 
   @Override

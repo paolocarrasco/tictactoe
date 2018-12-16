@@ -94,7 +94,7 @@ public class GameControllerTest {
     gameController.printWinner();
     outputStream.flush();
     String output = new String(outputStream.toByteArray());
-    assertThat(output, is("Game is over! The winner was Robot.\n"));
+    assertThat(output, is("Game is over! The winner was Simple Robot.\n"));
   }
 
 }

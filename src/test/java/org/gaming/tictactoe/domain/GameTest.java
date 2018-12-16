@@ -36,7 +36,8 @@ public class GameTest {
   @Test
   public void shouldUseGridPassIfIsPassedAsParameterInConstructor() {
     String[][] grid = new String[][]{{"X", "C", "X"}, {" ", " ", " "}, {"X", "C", "X"}};
-    Game game = new SimpleGame(new GameConfiguration(3, new Player[]{Human1, Robot}), grid);
+    GameConfiguration configuration = new GameConfiguration(3, new Player[]{Human1, Robot});
+    Game game = new SimpleGame(configuration, grid, 0, 0);
     assertThat(game.getGrid(), is(equalTo(grid)));
   }
 
