@@ -12,6 +12,10 @@ public class SimpleGame extends Game {
     super(configuration);
   }
 
+  public SimpleGame(GameConfiguration gameConfiguration, String[][] grid) {
+    super(gameConfiguration, grid);
+  }
+
   @Override
   public boolean isOver() {
     return evaluateWinnerInRow()

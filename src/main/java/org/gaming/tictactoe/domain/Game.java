@@ -15,12 +15,16 @@ public abstract class Game {
   Player winner;
   private int turn;
 
-  Game(GameConfiguration configuration) {
-    gridSize = configuration.getSize();
-    grid = new String[gridSize][gridSize];
+  public Game(GameConfiguration configuration, String[][] grid) {
+    gridSize = grid.length;
     players = configuration.getPlayers();
     winner = PlayerContainer.NoOne;
     turn = new Random(System.currentTimeMillis()).nextInt(players.length);
+    this.grid = grid;
+  }
+
+  Game(GameConfiguration configuration) {
+    this(configuration, new String[configuration.getSize()][configuration.getSize()]);
   }
 
   public abstract boolean isOver();

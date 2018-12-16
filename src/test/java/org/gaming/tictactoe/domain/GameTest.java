@@ -34,6 +34,13 @@ public class GameTest {
   }
 
   @Test
+  public void shouldUseGridPassIfIsPassedAsParameterInConstructor() {
+    String[][] grid = new String[][]{{"X", "C", "X"}, {" ", " ", " "}, {"X", "C", "X"}};
+    Game game = new SimpleGame(new GameConfiguration(3, new Player[]{Human1, Robot}), grid);
+    assertThat(game.getGrid(), is(equalTo(grid)));
+  }
+
+  @Test
   public void shouldHaveGridWithSizeConfigured() {
     game = new SimpleGame(new GameConfiguration(4, players));
     String[][] grid = game.getGrid();
